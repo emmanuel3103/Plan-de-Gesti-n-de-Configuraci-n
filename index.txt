@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Plan de Gestión de Configuración — Sistema EDI-301</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.6;
+      margin: 0;
+      padding: 0 1.5rem 3rem;
+      max-width: 1200px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    header {
+      text-align: center;
+      margin: 2rem 0;
+    }
+    h1, h2, h3, h4 {
+      color: #222;
+    }
+    nav {
+      background: #f5f5f5;
+      border: 1px solid #ddd;
+      padding: 1rem;
+      margin-bottom: 2rem;
+    }
+    nav h2 {
+      margin-top: 0;
+    }
+    nav ul {
+      list-style: none;
+      padding-left: 0;
+      margin: 0;
+    }
+    nav li {
+      margin-bottom: 0.25rem;
+    }
+    nav a {
+      text-decoration: none;
+      color: #0066cc;
+    }
+    nav a:hover {
+      text-decoration: underline;
+    }
+    section {
+      margin-bottom: 2rem;
+    }
+    ul, ol {
+      margin-top: 0.3rem;
+      margin-bottom: 0.8rem;
+    }
+    code, pre {
+      background: #f4f4f4;
+      padding: 0.3rem 0.5rem;
+      border-radius: 4px;
+    }
+    pre {
+      overflow-x: auto;
+      padding: 1rem;
+    }
+
+    /* ===== Estilo de tablas ===== */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+      margin-bottom: 1.5rem;
+      font-size: 0.95rem;
+    }
+    th, td {
+      padding: 8px 12px;
+      text-align: left;
+      border: 1px solid #ccc;
+      vertical-align: top;
+    }
+    th {
+      background-color: #f0f0f0;
+      font-weight: bold;
+    }
+    tbody tr:nth-child(even) {
+      background-color: #fafafa;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Plan de Gestión de Configuración — Sistema EDI-301</h1>
+  <p>Equipo de desarrollo EDI-301 — Universidad Linda Vista</p>
+</header>
+
+<nav>
+  <h2>Índice</h2>
+  <ul>
+    <li><a href="#intro">1. Introducción</a>
+      <ul>
+        <li><a href="#intro-proposito">1.1 Propósito</a></li>
+        <li><a href="#intro-alcance">1.2 Alcance</a></li>
+      </ul>
+    </li>
+    <li><a href="#roles">2. Roles y responsabilidades</a></li>
+    <li><a href="#control">3. Control de configuración</a>
+      <ul>
+        <li><a href="#control-ecs">3.1 Identificación de elementos de configuración</a></li>
+        <li><a href="#control-versiones">3.2 Control de versiones</a></li>
+        <li><a href="#control-cambios">3.3 Control de cambios</a></li>
+        <li><a href="#control-entornos">3.4 Control de entornos</a></li>
+      </ul>
+    </li>
+    <li><a href="#cmdb">4. Base de datos de gestión de configuración (CMDB)</a></li>
+    <li><a href="#status">5. Seguimiento del estado de configuración</a></li>
+    <li><a href="#auditorias">6. Auditorías de configuración</a>
+      <ul>
+        <li><a href="#aud-func">6.1 Auditoría funcional</a></li>
+        <li><a href="#aud-fisica">6.2 Auditoría física</a></li>
+        <li><a href="#aud-periodicidad">6.3 Periodicidad</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+<section id="intro">
+  <h2>1. Introducción</h2>
+
+  <section id="intro-proposito">
+    <h3>1.1 Propósito</h3>
+    <p>
+      El propósito de este Plan de Gestión de Configuración (PGC) es establecer los lineamientos,
+      procesos, herramientas y responsabilidades necesarios para gestionar de manera adecuada los
+      elementos de configuración del sistema <strong>EDI-301</strong>, incluyendo el control de
+      versiones, la gestión de cambios, el seguimiento de artefactos y la administración de entornos.
+    </p>
+    <p>
+      Este documento asegura que todos los componentes del sistema sean identificados, controlados,
+      auditados y mantenidos de manera consistente durante todo su ciclo de vida.
+    </p>
+  </section>
+
+  <section id="intro-alcance">
+    <h3>1.2 Alcance</h3>
+    <p>Este plan aplica a todos los elementos relacionados con la construcción, despliegue y mantenimiento del sistema EDI-301, incluyendo:</p>
+
+    <h4>Código fuente</h4>
+    <ul>
+      <li>Aplicación móvil en Flutter.</li>
+      <li>Backend en Node.js / Express.</li>
+      <li>Scripts SQL de base de datos.</li>
+      <li>Archivos de configuración, assets e imágenes.</li>
+    </ul>
+
+    <h4>Artefactos documentales</h4>
+    <ul>
+      <li>Documentación técnica (diseño, arquitectura).</li>
+      <li>Manuales (usuario, mantenimiento, pruebas).</li>
+      <li>Especificaciones y diagramas.</li>
+      <li>Planes de prueba y reportes de resultados.</li>
+    </ul>
+
+    <h4>Gestión de entornos</h4>
+    <ul>
+      <li>Entorno de Desarrollo (DEV).</li>
+      <li>Entorno de Pruebas (QA).</li>
+      <li>Entorno de Producción (PROD).</li>
+    </ul>
+
+    <h4>Fuera de alcance</h4>
+    <ul>
+      <li>Sistemas o servicios externos ajenos al proyecto.</li>
+      <li>Documentación institucional no relacionada directamente con el software.</li>
+      <li>Mantenimiento físico de infraestructura no controlada por el equipo EDI.</li>
+    </ul>
+  </section>
+</section>
+
+<section id="roles">
+  <h2>2. Roles y responsabilidades</h2>
+  <p>
+    Para garantizar un control adecuado de la configuración, se definen los siguientes roles y sus
+    responsabilidades asociadas.
+  </p>
+
+  <h3>2.1 Administrador de configuración</h3>
+  <ul>
+    <li>Controlar los elementos de configuración (EC).</li>
+    <li>Mantener actualizada la CMDB.</li>
+    <li>Autorizar versiones oficiales y releases.</li>
+    <li>Coordinar auditorías de configuración.</li>
+    <li>Monitorear el cumplimiento del PGC.</li>
+  </ul>
+
+  <h3>2.2 Equipo de desarrollo (frontend / backend)</h3>
+  <ul>
+    <li>Registrar cambios en GitHub utilizando ramas establecidas.</li>
+    <li>Documentar modificaciones significativas en el código.</li>
+    <li>Crear versiones candidatas (Release Candidate).</li>
+    <li>Informar incidencias relacionadas con la configuración.</li>
+  </ul>
+
+  <h3>2.3 Equipo de QA</h3>
+  <ul>
+    <li>Validar la integridad de nuevas versiones en los entornos de prueba.</li>
+    <li>Verificar que los entornos reflejen la configuración aprobada.</li>
+    <li>Reportar defectos relacionados con versiones o inconsistencias de configuración.</li>
+  </ul>
+
+  <h3>2.4 Coordinador del proyecto</h3>
+  <ul>
+    <li>Autorizar cambios mayores en el sistema (cambios de alto impacto).</li>
+    <li>Aprobar versiones para su despliegue en producción.</li>
+    <li>Asegurar alineación con los requerimientos institucionales.</li>
+  </ul>
+</section>
+
+<section id="control">
+  <h2>3. Control de configuración</h2>
+  <p>
+    El control de configuración garantiza que cualquier cambio realizado en el sistema sea autorizado,
+    registrado, evaluado y documentado antes de integrarse definitivamente.
+  </p>
+
+  <section id="control-ecs">
+    <h3>3.1 Identificación de elementos de configuración</h3>
+    <p>Se consideran elementos de configuración (EC), entre otros:</p>
+    <ul>
+      <li>Código fuente de la app móvil (Flutter).</li>
+      <li>Código fuente del backend (Node.js / Express).</li>
+      <li>Scripts SQL de creación y actualización de la base de datos.</li>
+      <li>Endpoints de la API documentados.</li>
+      <li>Manual de usuario, manual de mantenimiento, documentación de pruebas.</li>
+      <li>Archivos de recursos (imágenes, íconos, fuentes, multimedia).</li>
+      <li>Scripts de despliegue y archivos de configuración de entornos.</li>
+    </ul>
+    <p>
+      Cada elemento de configuración contará, como mínimo, con: identificador único, versión, tipo,
+      ubicación en repositorio y responsable.
+    </p>
+  </section>
+
+  <section id="control-versiones">
+    <h3>3.2 Control de versiones</h3>
+    <p>Sistema de control de versiones: <strong>Git</strong>, alojado en <strong>GitHub</strong>.</p>
+
+    <h4>Ramas principales</h4>
+    <ul>
+      <li><strong>main:</strong> contiene la versión estable de producción.</li>
+      <li><strong>dev:</strong> integra nuevas funcionalidades antes de estabilizar.</li>
+      <li><strong>feature/&lt;nombre&gt;:</strong> desarrollo de funcionalidades específicas.</li>
+      <li><strong>hotfix/&lt;nombre&gt;:</strong> correcciones urgentes en producción.</li>
+      <li><strong>release/&lt;versión&gt;:</strong> preparación de una versión para despliegue.</li>
+    </ul>
+
+    <h4>Versionado semántico (SemVer)</h4>
+    <p>Formato recomendado: <code>MAJOR.MINOR.PATCH</code></p>
+    <ul>
+      <li><strong>MAJOR:</strong> cambios incompatibles.</li>
+      <li><strong>MINOR:</strong> nuevas funcionalidades compatibles.</li>
+      <li><strong>PATCH:</strong> correcciones de errores y ajustes menores.</li>
+    </ul>
+    <p>Ejemplo de versión: <strong>v2.1.4</strong></p>
+  </section>
+
+  <section id="control-cambios">
+    <h3>3.3 Control de cambios</h3>
+    <p>El proceso de control de cambios se compone de las siguientes etapas:</p>
+    <ol>
+      <li>Registro de la solicitud de cambio (Issue en GitHub o formulario interno).</li>
+      <li>Evaluación del impacto técnico y funcional.</li>
+      <li>Aprobación del cambio por el Coordinador del proyecto o Administrador de configuración.</li>
+      <li>Implementación del cambio en la rama correspondiente.</li>
+      <li>Revisión por medio de Pull Request.</li>
+      <li>Ejecución de pruebas por QA.</li>
+      <li>Integración a rama principal (dev o main) según corresponda.</li>
+      <li>Actualización de la CMDB y documentación afectada.</li>
+    </ol>
+  </section>
+
+  <section id="control-entornos">
+    <h3>3.4 Control de entornos</h3>
+    <p>
+      Los entornos de desarrollo, prueba y producción se gestionan de manera diferenciada para asegurar
+      estabilidad y trazabilidad de las versiones desplegadas.
+    </p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Entorno</th>
+          <th>Propósito</th>
+          <th>Contenido típico</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>DEV (Desarrollo)</td>
+          <td>Trabajo activo de los desarrolladores.</td>
+          <td>Código en progreso, nuevas funcionalidades, pruebas iniciales.</td>
+        </tr>
+        <tr>
+          <td>QA (Pruebas)</td>
+          <td>Validación por parte de QA y usuarios clave.</td>
+          <td>Versión candidata, datos de prueba controlados, logs activos.</td>
+        </tr>
+        <tr>
+          <td>PROD (Producción)</td>
+          <td>Uso real por parte de alumnos y colaboradores.</td>
+          <td>Versión estable aprobada, datos reales, monitoreo permanente.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>
+      Los cambios en producción requieren autorización formal y registro específico en la CMDB y en
+      el historial de despliegues.
+    </p>
+  </section>
+</section>
+
+<section id="cmdb">
+  <h2>4. Base de datos de gestión de configuración (CMDB)</h2>
+  <p>
+    La CMDB (Configuration Management Database) almacena el inventario de todos los elementos de
+    configuración, sus versiones, estados y relaciones.
+  </p>
+  <p>Cada entrada en la CMDB incluye, al menos:</p>
+  <ul>
+    <li>Identificador del elemento de configuración.</li>
+    <li>Categoría (código, documento, script, recurso, etc.).</li>
+    <li>Versión actual.</li>
+    <li>Estado (en desarrollo, en pruebas, aprobado, en producción).</li>
+    <li>Ubicación (URL de repositorio, ruta interna, etc.).</li>
+    <li>Responsable técnico.</li>
+  </ul>
+
+  <h3>Ejemplo de registro en la CMDB</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Elemento de configuración</th>
+        <th>Versión</th>
+        <th>Estado</th>
+        <th>Ubicación</th>
+        <th>Responsable</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Backend API EDI-301</td>
+        <td>v1.5.2</td>
+        <td>Producción</td>
+        <td>repo/backend-api</td>
+        <td>Desarrollador backend</td>
+      </tr>
+      <tr>
+        <td>App móvil EDI-301 (Flutter)</td>
+        <td>v2.0.1</td>
+        <td>QA</td>
+        <td>repo/app-movil</td>
+        <td>Desarrollador móvil</td>
+      </tr>
+      <tr>
+        <td>Scripts BD EDI-301</td>
+        <td>v1.3</td>
+        <td>Aprobado</td>
+        <td>repo/db-scripts</td>
+        <td>DBA / Backend</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>
+    La CMDB puede implementarse como un archivo JSON, una hoja de cálculo compartida, una wiki interna
+    o una sección específica dentro del repositorio de GitHub.
+  </p>
+</section>
+
+<section id="status">
+  <h2>5. Seguimiento del estado de configuración</h2>
+  <p>
+    El seguimiento del estado de configuración (Configuration Status Accounting) consiste en registrar
+    y reportar el estado actual de cada elemento de configuración a lo largo del tiempo.
+  </p>
+  <p>Incluye:</p>
+  <ul>
+    <li>Historial de versiones y cambios.</li>
+    <li>Estados de aprobación de cambios (aprobado, rechazado, pendiente).</li>
+    <li>Reportes de estado por rama (main, dev, release).</li>
+    <li>Registro de hotfixes y parches aplicados.</li>
+    <li>Registro de despliegues a QA y producción.</li>
+  </ul>
+
+  <h3>Ejemplo de reporte de estado de configuración</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Elemento</th>
+        <th>Versión actual</th>
+        <th>Última modificación</th>
+        <th>Responsable</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>App EDI-301 (móvil)</td>
+        <td>v2.1.0</td>
+        <td>12/11/2025</td>
+        <td>Equipo móvil</td>
+      </tr>
+      <tr>
+        <td>API REST EDI-301</td>
+        <td>v1.9.3</td>
+        <td>10/11/2025</td>
+        <td>Equipo backend</td>
+      </tr>
+      <tr>
+        <td>Esquema BD EDI-301</td>
+        <td>v1.4</td>
+        <td>09/11/2025</td>
+        <td>DBA</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<section id="auditorias">
+  <h2>6. Auditorías de configuración</h2>
+  <p>
+    Las auditorías de configuración garantizan que todos los artefactos del sistema estén correctamente
+    registrados, actualizados y alineados con las versiones desplegadas en los diferentes entornos.
+  </p>
+
+  <section id="aud-func">
+    <h3>6.1 Auditoría funcional</h3>
+    <p>La auditoría funcional verifica que:</p>
+    <ul>
+      <li>Las versiones documentadas coincidan con las versiones implementadas.</li>
+      <li>Los cambios aprobados se hayan aplicado correctamente.</li>
+      <li>No existan componentes sin registrar en la CMDB.</li>
+      <li>La documentación técnica corresponda a la versión actual del sistema.</li>
+    </ul>
+  </section>
+
+  <section id="aud-fisica">
+    <h3>6.2 Auditoría física</h3>
+    <p>La auditoría física confirma que:</p>
+    <ul>
+      <li>Los archivos presentes en DEV, QA y PROD corresponden a las versiones aprobadas.</li>
+      <li>No haya archivos obsoletos, duplicados o no autorizados en el repositorio.</li>
+      <li>Las rutas y ubicaciones declaradas en la CMDB sean correctas.</li>
+    </ul>
+  </section>
+
+  <section id="aud-periodicidad">
+    <h3>6.3 Periodicidad</h3>
+    <ul>
+      <li><strong>Auditoría menor:</strong> mensual, enfocada en cambios recientes.</li>
+      <li><strong>Auditoría completa:</strong> trimestral, revisión integral de elementos y entornos.</li>
+      <li><strong>Auditoría extraordinaria:</strong> posterior a incidentes críticos o fallos graves.</li>
+    </ul>
+  </section>
+</section>
+
+</body>
+</html>
